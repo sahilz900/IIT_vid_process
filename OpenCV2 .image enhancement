@@ -1,0 +1,112 @@
+#IMAGE ENHANCEMENT
+
+import cv2
+import os
+
+def increase_resolution(input_image_path, output_directory):
+    
+    image = cv2.imread(input_image_path)
+
+    
+    if image is None:
+        raise FileNotFoundError(f"Could not load image at {input_image_path}")
+
+    
+    scale_factor = 4  
+
+    
+    height, width = image.shape[:2]
+
+    
+    new_dimensions = (width * scale_factor, height * scale_factor)
+
+    
+    high_res_image = cv2.resize(image, new_dimensions, interpolation=cv2.INTER_CUBIC)
+
+    
+    os.makedirs(output_directory, exist_ok=True)
+
+    
+    output_image_path = os.path.join(output_directory, 'high_res_000064.jpg')
+
+    
+    cv2.imwrite(output_image_path, high_res_image)
+    print(f'High-resolution image saved to {output_image_path}')
+
+def main():
+    input_image_path = '/Users/devilboy/Imageinput/000064.jpg'
+    output_directory = '/Users/devilboy/Imageoutput'
+    
+    increase_resolution(input_image_path, output_directory)
+
+if __name__ == '__main__':
+    main()
+
+
+
+#COMPARISON OF IMAGE
+
+from PIL import Image
+import matplotlib.pyplot as plt
+
+def display_image_info(image_path):
+    
+    image = Image.open(image_path)
+    
+    
+    image_info = {
+        "format": image.format,
+        "mode": image.mode,
+        "size": image.size,  
+        
+        "palette": image.palette  
+    }
+    
+    return image, image_info
+
+image_path = '/Users/devilboy/Imageoutput/high_res_000064.jpg'
+image, info = display_image_info(image_path)
+
+
+print("Image Information:")
+for key, value in info.items():
+    print(f"{key}: {value}")
+
+
+plt.imshow(image)
+plt.axis('off')  
+plt.show()
+
+
+
+
+from PIL import Image
+import matplotlib.pyplot as plt
+
+def display_image_info(image_path):
+    
+    image = Image.open(image_path)
+    
+    
+    image_info = {
+        "format": image.format,
+        "mode": image.mode,
+        "size": image.size,  
+        
+        "palette": image.palette  
+    }
+    
+    return image, image_info
+
+image_path = '/Users/devilboy/Imageinput/000064.jpg'
+image, info = display_image_info(image_path)
+
+
+print("Image Information:")
+for key, value in info.items():
+    print(f"{key}: {value}")
+
+
+plt.imshow(image)
+plt.axis('off')  
+plt.show()
